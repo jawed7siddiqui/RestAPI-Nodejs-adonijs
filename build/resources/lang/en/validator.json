@@ -1,0 +1,17 @@
+{
+    "shared": {
+        "required": "The field is required.",
+        "email": "The field must be a valid email address.",
+        "exists": "The selected field is unavailable.",
+        "url": "The field format is invalid.",
+        "confirmed": "The field confirmation does not match.",
+        "integer": "The field must be an integer.",
+        "date": "The field is not a valid date.",
+        "boolean": "The field field must be true or false.",
+        "string": "The field must be a string.",
+        "unique": "The field has already been taken.",
+        "number": "The field must be a number.",
+        "alpha": "The field may only contain letters.",
+        "minLength": "The field must have { minLength } items"
+    }
+}

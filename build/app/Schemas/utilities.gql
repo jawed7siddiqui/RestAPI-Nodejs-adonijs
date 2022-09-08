@@ -1,0 +1,13 @@
+scalar DateTime
+
+scalar Upload
+
+enum STATUS {
+    Active
+    Inactive
+}
+
+type Media {
+    id: Int!
+    src: String
+}

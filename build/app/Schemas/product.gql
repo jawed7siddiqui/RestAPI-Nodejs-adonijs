@@ -1,0 +1,340 @@
+type Product {
+    id: Int!
+    category_id: Int
+    title: String
+    short_description: String
+    long_description: String
+    html_content: String
+    price: Float
+    discount: Float
+    country_of_origin: String
+    medias: [Media]
+    attributes: [ProductAttribute]
+    faqs: [ProductFAQ]
+    stock: Int
+    status: STATUS!
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+input ProductInput {
+    category_id: Int
+    title: String
+    short_description: String
+    long_description: String
+    html_content: String
+    price: Float
+    discount: Float
+    country_of_origin: String
+    medias: [Upload]
+    status: STATUS!
+}
+
+type ProductAttribute {
+    name: String
+    value: String
+}
+
+input ProductAttributeInput {
+    name: String
+    value: String
+}
+
+type ProductFAQ {
+    id: Int!
+    product_id: Int
+    question: String
+    answer: String
+}
+
+input ProductFAQInput {
+    question: String!
+    answer: String!
+}
+
+type Query {
+    productFindAll: [Product]
+    productFindOne(id: Int!): Product
+}
+
+type Mutation {
+    productCreate (data: ProductInput!): Product
+    productUpdate (id: Int!, data: ProductInput!): Product
+    productDelete (id: Int!): Boolean
+    productMediaDelete (id: Int!): Boolean
+
+    productAttributeUpdateOrCreate (product_id: Int!, data: ProductAttributeInput!): [ProductAttribute]
+    productAttributeDelete (product_id: Int!, name: String!): Boolean
+
+    productFAQCreate (product_id: Int!, data: ProductFAQInput!): ProductFAQ
+    productFAQUpdate (id: Int!, data: ProductFAQInput!): ProductFAQ
+    productFAQDelete (id: Int!): Boolean
+}
+
+# ===========================================================
+#     Product: Create
+# ===========================================================
+
+# mutation {
+#     productCreate(data: {
+#         category_id: 1,
+#         title: "Product-1",
+#         short_description: "Short Description",
+#         long_description: "Long Description",
+#         html_content: "HTML Content",
+#         price: 500,
+#         discount: 10,
+#         country_of_origin: "India",
+#         status: Active,
+#     }) {
+#         id,
+#         category_id,
+#         title,
+#         short_description,
+#         long_description,
+#         html_content,
+#         price,
+#         discount,
+#         country_of_origin,
+#         medias {
+#             id,
+#             src
+#         },
+#         attributes {
+#             name,
+#             value
+#         },
+#         faqs {
+#             id,
+#             question,
+#             answer,
+#         },
+#         stock,
+#         status,
+#         created_at,
+#         updated_at
+#     }
+# }
+
+# ===========================================================
+#     Product: Create With Postman
+# ===========================================================
+
+# operations: '{
+#     "query": "mutation($medias: [Upload]) { productCreate(data: {category_id: 1, title: \"Product-1\", price: 500, medias: $medias, status: Active}) {id, category_id, title, short_description, long_description, html_content, price, discount, country_of_origin, medias {id, src}, stock, status, created_at, updated_at}}",
+#     "variables": {
+#         "medias": [null, null]
+#     }
+# }'
+
+# map: '{"0": ["variables.medias.0"], "1": ["variables.medias.1"]}'
+
+# 0: file
+
+# ===========================================================
+#     Product: Update
+# ===========================================================
+
+# mutation {
+#     productUpdate(id: 1, data: {
+#         category_id: 1,
+#         title: "Product-1",
+#         short_description: "Short Description",
+#         long_description: "Long Description",
+#         html_content: "HTML Content",
+#         price: 500,
+#         discount: 10,
+#         country_of_origin: "India",
+#         status: Active,
+#     }) {
+#         id,
+#         category_id,
+#         title,
+#         short_description,
+#         long_description,
+#         html_content,
+#         price,
+#         discount,
+#         country_of_origin,
+#         medias {
+#             id,
+#             src
+#         },
+#         attributes {
+#             name,
+#             value
+#         },
+#         faqs {
+#             id,
+#             question,
+#             answer,
+#         },
+#         stock,
+#         status,
+#         created_at,
+#         updated_at
+#     }
+# }
+
+# ===========================================================
+#     Product: Update With Postman
+# ===========================================================
+
+# operations: '{
+#     "query": "mutation($medias: [Upload]) { productUpdate(id: 1, data: {category_id: 1, title: \"Product-1\", price: 500, medias: $medias, status: Active}) {id, category_id, title, short_description, long_description, html_content, price, discount, country_of_origin, medias {id, src}, stock, status, created_at, updated_at}}",
+#     "variables": {
+#         "medias": [null, null]
+#     }
+# }'
+
+# map: '{"0": ["variables.medias.0"], "1": ["variables.medias.1"]}'
+
+# 0: file
+
+# ===========================================================
+#     Product: Delete
+# ===========================================================
+
+# mutation {
+#     productDelete(id: 1)
+# }
+
+# ===========================================================
+#     Product Media: Delete
+# ===========================================================
+
+# mutation {
+#     productMediaDelete(id: 1)
+# }
+
+# ===========================================================
+#     Product: Find All
+# ===========================================================
+
+# query {
+#     productFindAll {
+#         id,
+#         category_id,
+#         title,
+#         short_description,
+#         long_description,
+#         html_content,
+#         price,
+#         discount,
+#         country_of_origin,
+#         medias {
+#             id,
+#             src
+#         },
+#         attributes {
+#             name,
+#             value
+#         },
+#         faqs {
+#             id,
+#             question,
+#             answer,
+#         },
+#         stock,
+#         status,
+#         created_at,
+#         updated_at
+#     }
+# }
+
+# ===========================================================
+#     Product: Find One
+# ===========================================================
+
+# query {
+#     productFindOne(id: 1) {
+#         id,
+#         category_id,
+#         title,
+#         short_description,
+#         long_description,
+#         html_content,
+#         price,
+#         discount,
+#         country_of_origin,
+#         medias {
+#             id,
+#             src
+#         },
+#         attributes {
+#             name,
+#             value
+#         },
+#         faqs {
+#             id,
+#             question,
+#             answer,
+#         },
+#         stock,
+#         status,
+#         created_at,
+#         updated_at
+#     }
+# }
+
+# ===========================================================
+#     Product Attribute: Update Or Create
+# ===========================================================
+
+# mutation {
+#     productAttributeUpdateOrCreate(product_id: 1, data: {
+#         name: "Color",
+#         value: "Red",
+#     }) {
+#         name
+#         value
+#     }
+# }
+
+# ===========================================================
+#     Product Attribute: Delete
+# ===========================================================
+
+# mutation {
+#     productAttributeDelete(product_id: 1, name: "Color")
+# }
+
+# ===========================================================
+#     Product FAQ: Create
+# ===========================================================
+
+# mutation {
+#     productFAQCreate(product_id: 1, data: {
+#         question: "Question-1",
+#         answer: "Answer-1",
+#     }) {
+#         id
+#         product_id
+#         question
+#         answer
+#     }
+# }
+
+# ===========================================================
+#     Product FAQ: Update
+# ===========================================================
+
+# mutation {
+#     productFAQUpdate(id: 1, data: {
+#         question: "Question-1",
+#         answer: "Answer-1",
+#     }) {
+#         id
+#         product_id
+#         question
+#         answer
+#     }
+# }
+
+# ===========================================================
+#     Product FAQ: Delete
+# ===========================================================
+
+# mutation {
+#     productFAQDelete(id: 1)
+# }
