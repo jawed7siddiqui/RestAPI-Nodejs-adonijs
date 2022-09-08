@@ -1,0 +1,37 @@
+type Auth {
+    token: String
+    user: User
+}
+
+type Mutation {
+    login (email: String, password: String): Auth
+}
+
+# ===========================================================
+#     HTTP Header for AUTH
+# ===========================================================
+
+# {
+#  "Authorization": "Bearer token_value_hear"
+# }
+
+# ===========================================================
+#     Login
+# ===========================================================
+
+# mutation {
+#     login(email: "mhmiton.dev@gmail.com", password: "123") {
+#         token
+#         user {
+#             id
+#             role_id
+#             name
+#             phone
+#             email
+#             username
+#             status
+#             created_at
+#             updated_at
+#         }
+#     }
+# }

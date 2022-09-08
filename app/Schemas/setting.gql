@@ -1,0 +1,75 @@
+type Setting {
+    site_name: String
+    site_category: String
+    site_type: String
+    site_logo: String
+}
+
+input SettingInput {
+    site_name: String
+    site_category: String
+    site_type: String
+    site_logo: Upload
+}
+
+type Query {
+    settingFindAll: Setting
+    settingFindOne(key: String!): String
+}
+
+type Mutation {
+    settingUpdateOrCreate (data: SettingInput!): Setting
+}
+
+# ===========================================================
+#     Setting: Update Or Create
+# ===========================================================
+
+# mutation {
+#     settingUpdateOrCreate(data: {
+#         site_name: "Ecomm",
+#         site_category: "Ecommerce",
+#         site_type: "Ecommerce",
+#     }) {
+#         site_name
+#         site_category
+#         site_type
+#         site_logo
+#     }
+# }
+
+# ===========================================================
+#     Setting: Create Or Create With Postman
+# ===========================================================
+
+# operations: '{
+#     "query": "mutation($site_logo: Upload) { settingUpdateOrCreate(data: {site_name: \"Ecomm-1\", site_category: \"Ecommerce-3\", site_type: \"Ecommerce\", site_logo: $site_logo}) {site_name, site_category, site_type, site_logo}}",
+#     "variables": {
+#         "site_logo": null
+#     }
+# }'
+
+# map: '{"0": ["variables.site_logo"]}'
+
+# 0: file
+
+# ===========================================================
+#     Setting: Find All
+# ===========================================================
+
+# query {
+#     settingFindAll {
+#         site_name
+#         site_category
+#         site_type
+#         site_logo
+#     }
+# }
+
+# ===========================================================
+#     Setting: Find One
+# ===========================================================
+
+# query {
+#     settingFindOne(key: "site_name")
+# }

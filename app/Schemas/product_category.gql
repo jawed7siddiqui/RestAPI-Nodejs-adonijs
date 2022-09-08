@@ -1,0 +1,190 @@
+type ProductCategory {
+    id: Int!
+    name: String!
+    slug: String!
+    image: String
+    attributes: [ProductCategoryAttribute]
+    status: STATUS!
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+input ProductCategoryInput {
+    name: String!
+    slug: String!
+    image: Upload
+    status: STATUS!
+}
+
+type ProductCategoryAttribute {
+    id: Int!
+    category_id: Int!
+    name: String!
+    status: STATUS!
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+input ProductCategoryAttributeInput {
+    name: String!
+    status: STATUS!
+}
+
+type Query {
+    productCategoryFindAll: [ProductCategory]
+    productCategoryFindOne(id: Int!): ProductCategory
+}
+
+type Mutation {
+    productCategoryCreate (data: ProductCategoryInput!): ProductCategory
+    productCategoryUpdate (id: Int!, data: ProductCategoryInput!): ProductCategory
+    productCategoryDelete (id: Int!): Boolean
+
+    productCategoryAttributeCreate (category_id: Int!, data: ProductCategoryAttributeInput!): ProductCategoryAttribute
+    productCategoryAttributeUpdate (id: Int!, data: ProductCategoryAttributeInput!): ProductCategoryAttribute
+    productCategoryAttributeDelete (id: Int!): Boolean
+}
+
+# ===========================================================
+#     Product Category: Create
+# ===========================================================
+
+# mutation {
+#     productCategoryCreate(data: {
+#         name: "Fasion",
+#         slug: "fasion",
+#         status: Active,
+#     }) {
+#         id
+#         name
+#         slug
+#         image
+#         attributes {
+#             id
+#             name
+#             status
+#         }
+#         status
+#         created_at
+#         updated_at
+#     }
+# }
+
+# ===========================================================
+#     Product Category: Update
+# ===========================================================
+
+# mutation {
+#     productCategoryUpdate(id: 1, data: {
+#         name: "Fasion",
+#         slug: "fasion",
+#         status: Active,
+#     }) {
+#         id
+#         name
+#         slug
+#         image
+#         attributes {
+#             id
+#             name
+#             status
+#         }
+#         status
+#         created_at
+#         updated_at
+#     }
+# }
+
+# ===========================================================
+#     Product Category: Delete
+# ===========================================================
+
+# mutation {
+#     productCategoryDelete(id: 1)
+# }
+
+# ===========================================================
+#     Product Category: Find All
+# ===========================================================
+
+# query {
+#     productCategoryFindAll {
+#         id
+#         name
+#         slug
+#         image
+#         attributes {
+#             id
+#             name
+#             status
+#         }
+#         status
+#         created_at
+#         updated_at
+#     }
+# }
+
+# ===========================================================
+#     Product Category: Find One
+# ===========================================================
+
+# query {
+#     productCategoryFindOne(id: 1) {
+#         id
+#         name
+#         slug
+#         image
+#         attributes {
+#             id
+#             name
+#             status
+#         }
+#         status
+#         created_at
+#         updated_at
+#     }
+# }
+
+# ===========================================================
+#     Product Category Attribute: Create
+# ===========================================================
+
+# mutation {
+#     productCategoryAttributeCreate(category_id: 1, data: {
+#         name: "Color",
+#         status: Active,
+#     }) {
+#         id
+#         category_id
+#         name
+#         status
+#         created_at
+#         updated_at
+#     }
+# }
+
+# ===========================================================
+#     Product Category Attribute: Update
+# ===========================================================
+
+# mutation {
+#     productCategoryAttributeUpdate(id: 1, data: {
+#         name: "Color",
+#         status: Active,
+#     }) {
+#         id
+#         category_id
+#         name
+#         status
+#         created_at
+#         updated_at
+#     }
+# }
+
+# ===========================================================
+#     Product Category Attribute: Delete
+# ===========================================================
+
+# mutation {
+#     productCategoryAttributeDelete(id: 1)
+# }

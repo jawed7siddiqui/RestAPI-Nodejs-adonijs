@@ -1,0 +1,88 @@
+type User {
+    id: Int!
+    role_id: Int
+    name: String
+    phone: String
+    email: String!
+    username: String
+    status: STATUS
+    created_at: DateTime
+    updated_at: DateTime
+}
+
+input UserInput {
+    name: String
+    phone: String
+    email: String!
+    username: String
+    password: String!
+}
+
+type Query {
+    userFindAll: [User]
+    userFindOne(id: Int!): User
+}
+
+type Mutation {
+    userCreate (data: UserInput!): User
+}
+
+# ===========================================================
+#     User: Create
+# ===========================================================
+
+# mutation {
+#     userCreate(data: {
+#         name: "Mehediul Hassan Miton",
+#         phone: "01632587495",
+#         email: "mhmiton.dev@gmail.com",
+#         username: "mhmiton.dev",
+#         password: "123",
+#     }) {
+#         id
+#         role_id
+#         name
+#         phone
+#         email
+#         username
+#         status
+#         created_at
+#         updated_at
+#     }
+# }
+
+# ===========================================================
+#     User: Find All
+# ===========================================================
+
+# query {
+#     userFindAll {
+#         id
+#         role_id
+#         name
+#         phone
+#         email
+#         username
+#         status
+#         created_at
+#         updated_at
+#     }
+# }
+
+# ===========================================================
+#     User: Find One
+# ===========================================================
+
+# query {
+#     userFindOne(id: 1) {
+#         id
+#         role_id
+#         name
+#         phone
+#         email
+#         username
+#         status
+#         created_at
+#         updated_at
+#     }
+# }
